@@ -50,11 +50,11 @@ html{
     font-size:62.5%; /*default browser font-size is 16px, this makes it so that 1rem === 10px (easier math) it also gives the user control over bumping up or down the font size because % is a scalable unit of measurement*/
 }
 body{
-    font-size:1.8rem; /*setting the font size back to 18px*/
-    line-height:1.5; /*no unit of measurement, it take the font size and multiplies it by this number to add space between lines*/
-    color:#4F4F4F; 
     background-color:#FBFFFB;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
 }
 a{
     font-family: 'Source Sans Pro', sans-serif;

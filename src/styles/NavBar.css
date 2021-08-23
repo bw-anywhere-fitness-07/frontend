@@ -1,13 +1,16 @@
 .navbar {
-    background-color: #293241;
+    background-color: #14213d ;
     height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.2rem;
     position: sticky;
     top: 0;
     z-index: 20;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
   }
   
   .nav-container {
@@ -19,7 +22,7 @@
   }
   
   .nav-logo {
-    color: #e0fbfc;
+    color: #e5e5e5 ;
     align-items: center;
     cursor: pointer;
     text-decoration: none;
@@ -36,7 +39,7 @@
   }
   
   .nav-links {
-    color: #e0fbfc;
+    color: #e5e5e5;
     text-decoration: none;
     padding: 0.5rem 1rem;
     height: 100%;
@@ -54,17 +57,17 @@
     height: 3px;
     width: 0;
     background: transparent;
-    transition: width 0.7s ease, background-color 0.5s ease;
+    transition: width .3s ease, background-color 0.5s ease;
   }
   
   .nav-items:hover:after {
     width: 100%;
-    background: #ee6c4d;
+    background: #fca311 ;
   }
   
   .nav-items .active {
-    color: #ee6c4d;
-    border: 1px solid #ee6c4d;
+    color: #fca311 ;
+    border: 1px solid #fca311 ;
   }
   
   .nav-icon {
