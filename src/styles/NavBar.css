@@ -1,0 +1,113 @@
+.navbar {
+    background-color: #293241;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1500px;
+  }
+  
+  .nav-logo {
+    color: #e0fbfc;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+    flex-grow: 1;
+    margin-left: 20px;
+  }
+  
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    text-align: center;
+    margin-right: 2rem;
+  }
+  
+  .nav-links {
+    color: #e0fbfc;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    height: 100%;
+    border-bottom: 3px solid transparent;
+  }
+  
+  .nav-items {
+    line-height: 40px;
+    margin: 1rem;
+  }
+  
+  .nav-items:after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 0;
+    background: transparent;
+    transition: width 0.7s ease, background-color 0.5s ease;
+  }
+  
+  .nav-items:hover:after {
+    width: 100%;
+    background: #ee6c4d;
+  }
+  
+  .nav-items .active {
+    color: #ee6c4d;
+    border: 1px solid #ee6c4d;
+  }
+  
+  .nav-icon {
+    display: none;
+  }
+  
+  @media screen and (max-width: 960px) {
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      width: 100px;
+      border-top: 1px solid #e0fbfc;
+      position: absolute;
+      top: 80px;
+      left: -110%;
+      opacity: 1;
+    }
+  
+    .nav-menu.active {
+      background: #293241;
+      left: 0px;
+      opacity: 1;
+      transition: all 0.5s ease;
+      z-index: 1;
+      width: 100%;
+    }
+    .nav-items.active {
+      color: #ee6c4d;
+      border: none;
+    }
+    .nav-links {
+      padding: 1.5rem;
+      width: 100%;
+      display: table;
+    }
+    .nav-icon {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(-100%, 60%);
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #e0fbfc;
+    }
+  }
