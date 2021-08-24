@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import "../styles/Signup.css";
 
 export default function Signup() {
   const [role, setRole] = useState("");
@@ -27,36 +28,49 @@ export default function Signup() {
 
   return (
     <div className="signUp">
-      <h2>SignUp</h2>
+      <h4>SignUp</h4>
       <form onSubmit={onSubmit}>
-        <div>
-          <h4>instuctor/</h4>
-          <input id="radioInstructor" type="radio" name="role" value="instructor" onChange={selectRole} />
+        <div className="role">
+          {/* <h4>instructor/client</h4> */}
+          <input
+            id="radioInstructor"
+            type="radio"
+            name="role"
+            value="instructor"
+            onChange={selectRole}
+            checked={role === "instructor"}
+          />
           <label htmlFor="radioInstructor">Instructor</label>
-          <br /> {/* remove this and add styling */}
-          <input id="radioClient" type="radio" name="role" value="client" onChange={selectRole} />
+
+          <input
+            id="radioClient"
+            type="radio"
+            name="role"
+            value="client"
+            onChange={selectRole}
+            checked={role === "client"}
+          />
           <label htmlFor="radioClient">Client</label>
         </div>
-        {/* if instructor, include additional Auth Code input */}
-        {role === "instructor" && (
-          <div>
+        <div className="inputs">
+          {role === "instructor" && (
             <label>
               Authorization Code
               <input id="authorizationCode" type="text" value={authCode} onChange={authCodeInput} />
             </label>
-          </div>
-        )}
-        <label>
-          Username
-          <input id="username" type="text" value={username} onChange={usernameInput} />
-        </label>
-        <br /> {/* remove this and add styling */}
-        <label>
-          password
-          <input id="password" type="password" value={password} onChange={passwordInput} />
-        </label>
+          )}
+          <label>
+            Username
+            <input id="username" type="text" value={username} onChange={usernameInput} />
+          </label>
+
+          <label>
+            password
+            <input id="password" type="password" value={password} onChange={passwordInput} />
+          </label>
+        </div>
         {/* can include email, phone, etc if time allows*/}
-        <br /> {/* remove this and add styling */}
+
         <button>Sign Up</button>
       </form>
     </div>
