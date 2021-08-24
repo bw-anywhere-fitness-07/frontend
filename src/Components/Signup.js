@@ -2,53 +2,40 @@ import React, { useState } from "react";
 import "../styles/Signup.css";
 import axios from "axios";
 
-export default function Signup() {
-  const [role, setRole] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [authCode, setAuthCode] = useState("");
+const initialFormValues = {
+  role: "",
+  username: "",
+  authCode: "",
+  password: "",
+};
 
-  const selectRole = (event) => {
-    setRole(event.target.value);
-    // console.log(role);
+export default function Signup() {
+  const [formValues, setFormValues] = useState(initialFormValues);
+
+  const handleChanges = (event) => {
+    const { value, name } = event.target;
+    setFormValues({ ...formValues, [name]: value });
   };
-  const usernameInput = (event) => {
-    setUsername(event.target.value);
-  };
-  const passwordInput = (event) => {
-    setPassword(event.target.value);
-  };
-  const authCodeInput = (event) => {
-    setAuthCode(event.target.value);
-  };
+
   const onSubmit = (event) => {
     event.preventDefault();
-    // console.log("submitting...");
-    // console.log("role ", role, "username ", username, "password ", password, "authCode ", authCode);
     newSignUp();
   };
-
-  const resetForm = () => {
-    setRole("");
-    setUsername("");
-    setPassword("");
-    setAuthCode("");
-  };
-
   const newSignUp = () => {
-    const newUser = () => {
-      return {
-        username: username,
-        role: role,
-        password: password,
-        authorization: authCode,
-      };
+    const newUser = {
+      username: formValues.username,
+      role: formValues.role,
+      password: formValues.password,
+      authorization: formValues.authCode,
     };
+    postUser(newUser);
+  };
+  const postUser = (newUser) => {
     axios
-      .post(/* usersURL */ `https://regres.in`, newUser) //or put?
+      .post("/api/user/register", newUser) //?? correct URL?
       .then(console.log(newUser))
       .catch((err) => console.error(err))
-      .finally(resetForm());
+      .finally(setFormValues(initialFormValues));
   };
 
   return (
@@ -62,8 +49,8 @@ export default function Signup() {
               type="radio"
               name="role"
               value="instructor"
-              onChange={selectRole}
-              checked={role === "instructor"}
+              onChange={handleChanges}
+              checked={formValues.role === "instructor"}
             />
             <label htmlFor="radioInstructor">Instructor</label>
 
@@ -72,31 +59,46 @@ export default function Signup() {
               type="radio"
               name="role"
               value="client"
-              onChange={selectRole}
-              checked={role === "client"}
+              onChange={handleChanges}
+              checked={formValues.role === "client"}
             />
             <label htmlFor="radioClient">Client</label>
           </div>
           <div className="inputs">
-            {role === "instructor" && (
+            {formValues.role === "instructor" && (
               <div>
                 <label htmlFor="authorizationCode">Authorization Code</label>
                 <input
                   id="authorizationCode"
                   type="text"
+                  name="authCode"
                   placeholder="instructor code"
-                  value={authCode}
-                  onChange={authCodeInput}
+                  value={formValues.authCode}
+                  onChange={handleChanges}
                 />
               </div>
             )}
             <div>
               <label htmlFor="username">Username</label>
-              <input id="username" type="text" placeholder="username" value={username} onChange={usernameInput} />
+              <input
+                id="username"
+                type="text"
+                name="username"
+                placeholder="username"
+                value={formValues.username}
+                onChange={handleChanges}
+              />
             </div>
             <div>
               <label htmlFor="password">Password</label>
-              <input id="password" type="password" placeholder="password" value={password} onChange={passwordInput} />
+              <input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="password"
+                value={formValues.password}
+                onChange={handleChanges}
+              />
             </div>
           </div>
           <div>

@@ -53,9 +53,9 @@
 }
 .role input:checked + label {
   /* background-color: #fca311; */
-  background-size: 100%;
   text-shadow: 0 0 10px rgba(0, 0, 0, 1);
-  /* background-image: linear-gradient(to middle, #fca311 0%, #14213d 51%, #fca311 100%); */
+  background: linear-gradient(to right, #14213d 20%, #fca311);
+  color: white;
   border-color: #14213d;
 }
 
@@ -78,6 +78,11 @@ input {
   display: flex;
   flex-direction: column;
 }
+
+.inputs input:focus {
+  background-color: #fca311;
+}
+
 button {
   width: 100%;
   height: 5rem;
