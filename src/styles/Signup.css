@@ -6,7 +6,7 @@
   background-color: #e5e5e511;
 }
 
-.signUpCard {
+.signUp .signUpCard {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,7 @@
   box-shadow: 0px 0px 20px 20px #e5e5e557;
 }
 
-.signUpCard h4 {
+.signUp .signUpCard h4 {
   padding: 3rem 2rem 0;
   font-size: 4rem;
 }
@@ -40,18 +40,18 @@
   width: 45%;
 }
 
-.role {
+.signUp .role {
   display: flex;
   margin: 3rem 0;
   justify-content: space-between;
 }
 
-.role input[type="radio"] {
+.signUp .role input[type="radio"] {
   opacity: 0;
   position: fixed;
   width: 0;
 }
-.role input:checked + label {
+.signUp .role input:checked + label {
   /* background-color: #fca311; */
   text-shadow: 0 0 10px rgba(0, 0, 0, 1);
   background: linear-gradient(to right, #14213d 20%, #fca311);
@@ -59,8 +59,8 @@
   border-color: #14213d;
 }
 
-.role label,
-input {
+.signUp .role label,
+.signUp input {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,16 +74,16 @@ input {
   padding: 0 2rem;
 }
 
-.inputs {
+.signUp .inputs {
   display: flex;
   flex-direction: column;
 }
 
-.inputs input:focus {
+.signUp .inputs input:focus {
   background-color: #fca311;
 }
 
-button {
+.signUp button {
   width: 100%;
   height: 5rem;
   border-radius: 2.5rem;
@@ -98,6 +98,6 @@ button {
   text-shadow: 0 0 10px rgba(0, 0, 0, 1);
   background-image: linear-gradient(to left, #14213d 0%, #fca311 51%, #14213d 100%);
 }
-button:hover {
+.signUp button:hover {
   background-position: right;
 }
