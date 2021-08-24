@@ -6,6 +6,7 @@ import "./App.css";
 import NavBar from "./Components/NavBar";
 import HomePage from "./Components/HomePage";
 import Signup from "./Components/Signup";
+import Login from './Components/Login'
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path={"/"} component={HomePage} />
-        <Route exact path={"/login"} />
+        <Route exact path={"/login"} component={Login}/>
         <Route exact path={"/signup"} component={Signup} />
       </Switch>
     </div>
