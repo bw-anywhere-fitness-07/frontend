@@ -15,7 +15,7 @@ const HomePage = () => {
                     <span className="heading-primary-sub">Fitness</span>
                 </h1>
                 <NavLink
-                exact to="/"
+                exact to="/login"
                 className="btn btn-white btn-animated"
                 // onClick={handleClick}
               >Login</NavLink>
