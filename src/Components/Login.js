@@ -1,39 +1,61 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
+import axiosWithAuth from '../utils/axiosWithAuth';
+import { useHistory } from 'react-router';
 
-
-export default function Login() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+const initialValues = {
+    username: "",
+    password: ""
+  }
   
-  const userChange = (evt) => {
-    setUsername(evt.target.value)
-    console.log(evt)
-  }
+export default function Login() {
+//   const [username, setUsername] = useState('')
+//   const [password, setPassword] = useState('')
+  
+//   const userChange = (evt) => {
+//     setUsername(evt.target.value)
+//     console.log(evt)
+//   }
+//   const passChange = (evt) => {
+//       setPassword(evt.target.value)
+//       console.log(evt)
+//   }
+// const onSubmit = () => {
+//   // axios
+// }
 
-  const passChange = (evt) => {
-      setPassword(evt.target.value)
-      console.log(evt)
-  }
+    const [formValues, setFormValues] = useState(initialValues);
+    const { push } = useHistory();
 
-  const onSubmit = () => {
-    // axios
-  }
+    const handleChanges = (e) => {
+        setFormValues({ ...formValues, [e.target.name]: e.target.value })
+        console.log(formValues)
+    };
+
+    const handleLoginSubmit = (e) => {
+        e.preventDefault();
+        axiosWithAuth()
+        .post('/api/auth/login', formValues)
+        .then((res) => {
+        push('/user/classes')
+        })
+        .catch((err)=> console.log(err));
+    };
 
     return(
         <CardStyle>
             <div className='cardLogin'>
                     <h1>Log in</h1> 
                     <div>
-                        <form onSubmit={onSubmit}>
+                        <form onSubmit={handleLoginSubmit}>
                             <div className='username-login'>
                                 <label htmlFor='username'>Username</label>
-                                <input id='username' name = 'name' type = 'text' value = {username} placeholder='username' onChange={userChange}/>
+                                <input id='username' name = 'name' type = 'text' value = {formValues.Linkusername} placeholder='username' onChange={handleChanges}/>
                             </div>
                             <div className='password-login'>
                                 <label htmlFor='password'>Password</label>
-                                <input id='password' name = 'password' type = 'password' value = {password} placeholder='password' onChange={passChange}/>
+                                <input id='password' name = 'password' type = 'password' value = {formValues.password} placeholder='password' onChange={handleChanges}/>
                             </div>
                             <div>
                                 <label>Remember me</label>

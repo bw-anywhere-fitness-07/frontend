@@ -14,12 +14,7 @@ const HomePage = () => {
                     <span className="heading-primary-main">Anywhere</span>
                     <span className="heading-primary-sub">Fitness</span>
                 </h1>
-                <NavLink
-                exact to="/login"
-                className="btn btn-white btn-animated"
-                // onClick={handleClick}
-              >Login</NavLink>
-                {/* <a href='#' className='btn btn-white btn-animated'>Login</a> */}
+                <NavLink exact to="/login" className="btn btn-white btn-animated">Login</NavLink>
             </div>
         </div>
     )
