@@ -3,9 +3,9 @@ import { Route, Redirect } from 'react-router-dom';
 
 function PrivateRoute({component: Component, ...rest}) {
     return(
-        <Route { ...rest} render= {() => {
+        <Route { ...rest} render= {(props) => {
             if(window.localStorage.getItem('token')){
-                return <Component /> 
+                return <Component {...props}/> 
              } else {
                     return <Redirect to= '/login' /> ;  
                 }

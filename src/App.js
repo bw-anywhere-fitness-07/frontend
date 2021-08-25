@@ -17,12 +17,10 @@ function App() {
     <div className="App">
       <NavBar />
       <Switch>
-        {/* <PrivateRoute> */}
-            <Route exact path="/instructor" component={InstructorPage} />
-            <Route exact path="/user/class" component={ClientPage} />
-            <Route exact path="/user" component={ClientClasses} />
-        {/* </PrivateRoute> */}
-        
+        <PrivateRoute path="/protected" >
+          {/* <ClientPage /> */}
+          <InstructorPage />
+        </PrivateRoute>        
         <Route exact path={"/"} component={HomePage} />
         <Route exact path={"/login"} component={Login}/>
         <Route exact path={"/signup"} component={Signup} />
