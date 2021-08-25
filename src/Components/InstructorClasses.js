@@ -1,28 +1,59 @@
 // Instructor view of the classes with added features
 
 import React from "react";
+import "../styles/InstructorClasses.css";
 
 export default function InstructorClasses(props) {
-  const { classes } = props;
+  const { classes, setClasses } = props;
+
+  const editClass = (courseId) => {
+    console.log("editing class");
+    console.log(courseId);
+  };
+
+  const deleteClass = (courseId) => {
+    console.log("deleting class...", courseId);
+    setClasses(classes.filter((item) => item.id !== courseId));
+
+    // ======================
+    // ALSO need to post-delete class from server by this same Id
+  };
+
   return (
     <div className="instructor-class-container">
-      {classes.map((course) => {
+      {/* {console.log(classes)} */}
+      {classes.map((course, index) => {
         return (
-          <div key={course.id}>
+          <div className="course-card" key={index}>
             <h4>{course.type}</h4>
             <div>
-              <div>instructor: {course.instructor_name}</div>
-
-              <div>date: {course.date}</div>
-              <div>time: {course.time}</div>
-              <div>length: {course.duration}</div>
+              <div>
+                {course.date} @ {course.time}
+                <span> -- length: {course.duration}</span>
+              </div>
               <div>level: {course.intensity}</div>
-              <div>where? {course.location}</div>
+              <div>location: {course.location}</div>
               <div>
                 registered: {course.registered}/{course.capacity}
               </div>
             </div>
-            <button>edit</button>
+            <button
+              id={course.id}
+              className="edit-btn"
+              onClick={() => {
+                editClass(course.id);
+              }}
+            >
+              edit
+            </button>
+            <button
+              className="edit-btn"
+              onClick={() => {
+                deleteClass(course.id);
+              }}
+            >
+              delete
+            </button>
           </div>
         );
       })}
