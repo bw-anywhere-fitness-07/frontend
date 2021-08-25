@@ -1,0 +1,38 @@
+.instructor-class-container {
+  width: 100%;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 25%);
+  grid-auto-flow: row;
+  justify-items: center;
+  justify-content: space-around;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: last baseline; */
+}
+.course-card {
+  border: solid gray 6px;
+  border-radius: 2rem;
+  width: 40rem;
+  padding: 3rem;
+  box-shadow: 0 0 20px 20px #e5e5e557;
+  background-color: white;
+  margin: 4rem 0;
+}
+
+.course-card h4 {
+  font-size: 3rem;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.course-card button {
+  background-color: #fca311;
+  color: #14213d;
+  font-size: 1.5rem;
+  padding: 3px 10px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  margin-top: 2rem;
+}
