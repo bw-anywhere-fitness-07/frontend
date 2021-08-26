@@ -10,20 +10,6 @@ const initialValues = {
   }
   
 export default function Login() {
-//   const [username, setUsername] = useState('')
-//   const [password, setPassword] = useState('')
-  
-//   const userChange = (evt) => {
-//     setUsername(evt.target.value)
-//     console.log(evt)
-//   }
-//   const passChange = (evt) => {
-//       setPassword(evt.target.value)
-//       console.log(evt)
-//   }
-// const onSubmit = () => {
-//   // axios
-// }
 
     const [formValues, setFormValues] = useState(initialValues);
     const { push } = useHistory();
@@ -169,26 +155,35 @@ const CardStyle = styled.div `
   font-size: 2rem;
   transition: 0.5s;
   background-size: 200%;
-  color: white;
+  color: #e5e5e5;
   letter-spacing: 0.5rem;
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(0, 0, 0, 1);
-  background-color: #118ab2;
-  background-image: linear-gradient(319deg, #118ab2 0%, #06d6a0 37%, #ffd166 100%);
+  background-color: #14213d ;
+  /* background-image: linear-gradient(319deg, #118ab2 0%, #06d6a0 37%, #ffd166 100%); */
  }
  .formSubmit:hover{
     background-position: right;
     box-shadow: 0 10px 20px rgba(0,0,0,.2);
+    background-color: #273F71;
+    color:#ffffff;
  }
  .signup{
      padding-bottom: 10px;
     h5{
-        color: gray
+        color: gray;
+        
+        
     }
     h5:hover{
-        color: purple;
+        color: #fca311;
         font-weight: bold;
         text-decoration: underline;
+        box-shadow: 0 10px 20px rgba(0,0,0,.2);
+        -moz-opacity: 0.5;
+        -khtml-opacity: 0.5;
+        opacity: 0.5;
+        
     }
  }
 `
