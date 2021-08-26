@@ -1,29 +1,33 @@
 .instructor-class-container {
   width: 100%;
   padding: 0 2rem;
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(3, 25%);
   grid-auto-flow: row;
   justify-items: center;
-  justify-content: space-around;
-  /* display: flex;
+  justify-content: space-around; */
+  display: flex;
   flex-wrap: wrap;
-  justify-content: last baseline; */
 }
 
 .edit-card {
   display: flex;
   flex-direction: column;
-  border: solid gray 6px;
+  align-items: flex-end;
+  border: solid rgba(255, 0, 0, 0.651) 6px;
   border-radius: 2rem;
   width: 40rem;
   padding: 3rem;
   box-shadow: 0 0 20px 20px #e5e5e557;
   background-color: white;
-  margin: 4rem 0;
+  margin: 4rem 4rem;
+}
+
+.edit-card input {
+  margin-left: 1rem;
 }
 .edit-card button {
-  background-color: #fca311;
+  background-color: #fca21194;
   color: #14213d;
   font-size: 1.5rem;
   padding: 3px 10px;
@@ -31,16 +35,17 @@
   align-items: center;
   text-transform: uppercase;
   margin-top: 2rem;
+  border-radius: 5px;
 }
 
 .course-card {
-  border: solid gray 6px;
+  /* border: solid gray 6px; */
   border-radius: 2rem;
   width: 40rem;
   padding: 3rem;
-  box-shadow: 0 0 20px 20px #e5e5e557;
+  box-shadow: 0 0 20px 20px #e5e5e5;
   background-color: white;
-  margin: 4rem 0;
+  margin: 4rem 4rem;
 }
 
 .course-card h4 {
@@ -50,7 +55,7 @@
 }
 
 .course-card button {
-  background-color: #fca311;
+  background-color: #fca21194;
   color: #14213d;
   font-size: 1.5rem;
   padding: 3px 10px;
@@ -58,4 +63,5 @@
   align-items: center;
   text-transform: uppercase;
   margin-top: 2rem;
+  border-radius: 5px;
 }
