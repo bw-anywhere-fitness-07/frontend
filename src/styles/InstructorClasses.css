@@ -10,6 +10,29 @@
   flex-wrap: wrap;
   justify-content: last baseline; */
 }
+
+.edit-card {
+  display: flex;
+  flex-direction: column;
+  border: solid gray 6px;
+  border-radius: 2rem;
+  width: 40rem;
+  padding: 3rem;
+  box-shadow: 0 0 20px 20px #e5e5e557;
+  background-color: white;
+  margin: 4rem 0;
+}
+.edit-card button {
+  background-color: #fca311;
+  color: #14213d;
+  font-size: 1.5rem;
+  padding: 3px 10px;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  margin-top: 2rem;
+}
+
 .course-card {
   border: solid gray 6px;
   border-radius: 2rem;
