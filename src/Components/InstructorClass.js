@@ -73,7 +73,6 @@ export default function EditClass(props) {
         className="edit-btn"
         onClick={() => {
           setIsEditing(true);
-          // editClass(course.id);
         }}
       >
         edit

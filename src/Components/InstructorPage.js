@@ -140,7 +140,7 @@ export default function InstructorPage() {
                 placeholder="class size"
                 onChange={handleChanges}
               />
-              <button>create class</button>
+              <button className="createClassBtn">create class</button>
             </form>
           </div>
         )}
