@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import dummyData from "../dummy-data/classes";
 import InstructorClasses from "./InstructorClasses";
 import "../styles/InstructorPage.css";
+import axios from "axios";
 
 const initialClassValues = {
   id: "",
@@ -26,7 +27,7 @@ export default function InstructorPage() {
 
   const myInstructorName = "Bob"; //not sure how this gets passed from instructor login?
   // useEffect(() => {
-  //   setClasses(dummyData);
+  //   setClasses(dummyData);axios.get
   // }, []);
   // useEffect(() => {
   //   setMyClasses(classes.filter((item) => item.instructor_name === myInstructorName));
@@ -48,8 +49,10 @@ export default function InstructorPage() {
   };
   const createNewClass = () => {
     const newClass = {
-      id: "?",
-      instructor_name: createClass.instructor_name, // : name from whoever is signed in?
+      id: 75,
+      //  API generating id, yeah??
+      // instructor_name: createClass.instructor_name,
+      // : name from whoever is signed in?
       type: createClass.type,
       date: createClass.date,
       time: createClass.time,
@@ -59,9 +62,41 @@ export default function InstructorPage() {
       capacity: createClass.capacity,
       registered: 0,
     };
+
     setMyClasses([...myClasses, newClass]); // once server is up, axios.put instead, and set classes with useEffect up above?
+    axios
+      // .post("https://mocki.io/v1/d4cc178d-5c35-4359-a3a4-69d21803f04e", newClass)
+      .get("https://mocki.io/v1/d4cc178d-5c35-4359-a3a4-69d21803f04e") // this is a test api, switch to post once ours is working
+      .then((res) => {
+        // console.log(res.data);
+        setMyClasses([...myClasses, res.data]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
     setAddClass(false);
     setCreateClass(initialClassValues);
+  };
+
+  const deleteClass = (courseId) => {
+    // console.log("deleting class...", courseId);
+    setMyClasses(myClasses.filter((item) => item.id !== courseId));
+
+    // ======================
+    // ALSO need to post-delete or (delete request based on server end) class from server by this same Id
+  };
+
+  const saveChanges = (editCourse) => {
+    setMyClasses(
+      myClasses.map((myClass) => {
+        if (myClass.id === editCourse.id) {
+          return editCourse;
+        }
+
+        return myClass;
+      })
+    );
   };
 
   return (
@@ -110,7 +145,7 @@ export default function InstructorPage() {
           </div>
         )}
       </div>
-      <InstructorClasses classes={myClasses} setClasses={setMyClasses} />
+      <InstructorClasses classes={myClasses} saveChanges={saveChanges} deleteClass={deleteClass} />
     </div>
   );
 }
