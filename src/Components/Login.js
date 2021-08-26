@@ -158,15 +158,16 @@ const CardStyle = styled.div `
   color: #e5e5e5;
   letter-spacing: 0.5rem;
   text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  
   background-color: #14213d ;
   /* background-image: linear-gradient(319deg, #118ab2 0%, #06d6a0 37%, #ffd166 100%); */
  }
  .formSubmit:hover{
     background-position: right;
     box-shadow: 0 10px 20px rgba(0,0,0,.2);
-    background-color: #273F71;
+    /* background-color: #273F71; */
     color:#ffffff;
+    filter: brightness(200%);
  }
  .signup{
      padding-bottom: 10px;
@@ -179,7 +180,6 @@ const CardStyle = styled.div `
         color: #fca311;
         font-weight: bold;
         text-decoration: underline;
-        box-shadow: 0 10px 20px rgba(0,0,0,.2);
         -moz-opacity: 0.5;
         -khtml-opacity: 0.5;
         opacity: 0.5;
