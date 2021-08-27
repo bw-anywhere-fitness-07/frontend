@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "../styles/Signup.css";
 import axios from "axios";
+import axiosWithAuth from '../utils/axiosWithAuth';
+import { useHistory } from 'react-router';
+
+
 
 const initialFormValues = {
   role: "",
@@ -11,11 +15,14 @@ const initialFormValues = {
 
 export default function Signup() {
   const [formValues, setFormValues] = useState(initialFormValues);
+  const { push } = useHistory();
 
-  const handleChanges = (event) => {
-    const { value, name } = event.target;
+  const handleChanges = (e) => {
+    const { value, name } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
+
+  console.log(formValues)
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -24,19 +31,28 @@ export default function Signup() {
   const newSignUp = () => {
     const newUser = {
       username: formValues.username,
-      role: formValues.role,
-      password: formValues.password,
-      authorization: formValues.authCode,
+      password: formValues.password
+      // authorization: formValues.authCode,
     };
     postUser(newUser);
   };
+  // const postUser = (newUser) => {
+  //   axios
+  //     .post("api/user/register", newUser) //?? correct URL?
+  //     .then(console.log(newUser))
+  //     .catch((err) => console.error(err))
+  //     .finally(setFormValues(initialFormValues));
+  // };
+
   const postUser = (newUser) => {
-    axios
-      .post("/api/user/register", newUser) //?? correct URL?
-      .then(console.log(newUser))
-      .catch((err) => console.error(err))
-      .finally(setFormValues(initialFormValues));
-  };
+    axiosWithAuth()
+    .post('https://web44scaffolding.herokuapp.com/api/user/register', newUser)
+    .then((res) => {
+      console.log(res)
+      // push('/api/user/login')
+    })
+    .catch((err) => console.log(err));
+};
 
   return (
     <div className="signUp">

@@ -1,32 +1,37 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 import axiosWithAuth from '../utils/axiosWithAuth';
 import { useHistory } from 'react-router';
+import axios from 'axios';
 
 const initialValues = {
     username: "",
     password: ""
   }
   
-export default function Login() {
+const Login = () => {
 
     const [formValues, setFormValues] = useState(initialValues);
     const { push } = useHistory();
 
     const handleChanges = (e) => {
         setFormValues({ ...formValues, [e.target.name]: e.target.value })
-        console.log(formValues)
     };
+    console.log(formValues)
+    
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
-        axiosWithAuth()
-        .post('/api/auth/login', formValues)
-        .then((res) => {
-        push('/user/classes')
+        axios
+            .post('https://web44scaffolding.herokuapp.com/api/user/login', formValues)
+            .then((res) => {
+                console.log("LOGGING IN RESPONSE", res)
+                localStorage.setItem("token", res.data.token)
+                localStorage.setItem("username", res.data.username)
+                push('/protected')
         })
-        .catch((err)=> console.log(err));
+        .catch((err) => console.log(err));
     };
 
     return(
@@ -39,9 +44,9 @@ export default function Login() {
                             <label htmlFor='username'>Username</label>
                             <input 
                             id='username' 
-                            name = 'name' 
+                            name = 'username' 
                             type = 'text' 
-                            value = {formValues.Linkusername} 
+                            value = {formValues.username} 
                             placeholder='username' 
                             onChange={handleChanges}/>
                         </div>
@@ -58,7 +63,7 @@ export default function Login() {
                         <div className='check'>
                             <label>Remember me</label>
                             <input 
-                            class="checkbox" 
+                            className="checkbox" 
                             id=" rememberMe" 
                             type="checkbox" />
                         </div>
@@ -76,6 +81,8 @@ export default function Login() {
         </CardStyle>
     )
 };
+
+export default Login
 
 const CardStyle = styled.div `
  display: flex;
