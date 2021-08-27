@@ -9,14 +9,17 @@ export default function InstructorClasses(props) {
 
   return (
     <div className="instructor-class-container">
-      {classes.map((course, _index) => (
-        <InstructorClass
-          key={course.id}
-          saveChanges={saveChanges}
-          deleteClass={() => deleteClass(course.id)}
-          course={course}
-        />
-      ))}
+      {classes.map((course) => {
+        // console.log(course.class_id);
+        return (
+          <InstructorClass
+            key={course.class_id}
+            saveChanges={saveChanges}
+            deleteClass={() => deleteClass(course.id)}
+            course={course}
+          />
+        );
+      })}
     </div>
   );
 }

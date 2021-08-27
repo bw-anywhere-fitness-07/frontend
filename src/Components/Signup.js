@@ -13,7 +13,7 @@ const initialFormValues = {
 
 export default function Signup() {
   const [formValues, setFormValues] = useState(initialFormValues);
-  const { push } = useHistory();
+  // const { push } = useHistory();
 
   const handleChanges = (e) => {
     const { value, name } = e.target;
