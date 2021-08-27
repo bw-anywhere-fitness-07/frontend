@@ -6,6 +6,7 @@ import ClientClass from './ClientClass';
 
 export default function ClientClasses(props) {
     const {classes} = props
+    
     return (
         <StyledClasses className='client-page-container'>
          {classes.map((course, index) =>(
