@@ -5,10 +5,12 @@ import crunch from '../images/fitness4.jpg'
 import dummyData from "../dummy-data/classes";
 import axios from 'axios'
 
+// const initialValue = {dummyData}
+
 export default function ClientPage() {
     const [availClasses, setAvailClasses] = useState(dummyData);
     const myName = "Samuel Dunder"; // ------->> However to link the username with API
-    
+    // const {searchedClasses} = useState()
     const [searchTerm, setSearchTerm] = useState("");
 
     const includesSearchTerm= (value) => {
@@ -18,13 +20,13 @@ export default function ClientPage() {
         let fields = [];
         fields.push(availClasses.type);
         fields.push(availClasses.location);
-        fields.push(availClasses.instructor);
+        fields.push(availClasses.instructor_name);
         fields.push(availClasses.date);
         fields.push(availClasses.time);
-        fields.push(availClasses.type);
+        fields.push(searchTerm)
         return fields.find(includesSearchTerm);
         };
-        const getFilteredClasses= (event) => {event.preventDefault(); setAvailClasses(availClasses.filter(postMatchesSearchTerm))};
+        const getFilteredClasses= (event) => {event.preventDefault(); availClasses.filter(postMatchesSearchTerm)};
 
         const inputHandler = (event) => {
              setSearchTerm(event.target.value);
