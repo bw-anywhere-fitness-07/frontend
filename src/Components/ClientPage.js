@@ -1,11 +1,34 @@
 import React, {useState} from 'react'
 import ClientClasses from './ClientClasses'
 import styled from 'styled-components'
-import crunch from '../images/crunch.jpg'
+import crunch from '../images/fitness4.jpg'
 import dummyData from "../dummy-data/classes";
+import axios from 'axios'
 
 export default function ClientPage() {
-    const [AvailClasses, setAvailClasses] = useState(dummyData);
+    const [availClasses, setAvailClasses] = useState(dummyData);
+    const myName = "Samuel Dunder"; // ------->> However to link the username with API
+    
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const includesSearchTerm= (value) => {
+        return value.toLowerCase().includes(searchTerm.toLowerCase());}
+        
+        const postMatchesSearchTerm= (availClasses) => {
+        let fields = [];
+        fields.push(availClasses.type);
+        fields.push(availClasses.location);
+        fields.push(availClasses.instructor);
+        fields.push(availClasses.date);
+        fields.push(availClasses.time);
+        fields.push(availClasses.type);
+        return fields.find(includesSearchTerm);
+        };
+        const getFilteredClasses= (event) => {event.preventDefault(); setAvailClasses(availClasses.filter(postMatchesSearchTerm))};
+
+        const inputHandler = (event) => {
+             setSearchTerm(event.target.value);
+            };
 
     return (
         <ClientPageStyle className='client-page-container'>
@@ -14,31 +37,53 @@ export default function ClientPage() {
                     <h2 className='client-heading'>FIND A CLASS</h2>
                 </div>
                 <div className='client-img'>
-                <img className='crunchImg' src={crunch} alt="Girl in a jacket" width="600" height="400"/>
+                <img className='crunchImg' src={crunch} alt="Gym equipment" width="600" height="400"/>
                 </div>
             </div>
             <div className='right-side'>
                 <div className='heading-right'>
-                    <h3 className='top-text'>Are You Ready To Begin Your Next Fitness Journey? </h3>
+                    <h3 className='top-text'>
+                    Hi {myName},
                     <br/>
-                    <h3 className='second-text'>Select an option below, and find available classes</h3>
-                    {/* <button className='LocationSubmit'><text>⬇️⬇️⬇️</text></button> */}
+                    Are You Ready To Begin Your Next Fitness Journey? </h3>
+                    <br/>
+                    <h3 className='second-text'>Scroll or click below, and find available classes</h3>
                 </div>
-                {/* <div className='button-container'>
-                    <h3>Select your location to view our schedules</h3>
-                    <button className='LocationSubmit'><text>Click Here</text></button>
-                </div> */}
-                <button className='LocationSubmit'><text className="arrow">⬇️⬇️⬇️</text></button>
+                <div className='LocationSubmit'>
+                    <a href="#down" className="arrow">↓</a>
+                </div>
             </div>
-            <div className='bottom-div'>
-                    <h1>HELLO</h1>
+            <div className='bottom-div' >
+            <div id='down'></div>
+            <h1 className='bottom-heading' >🏃‍♀️What're Your Goals🏋️‍♂️</h1>
+            <div id="searchWrapper">
+                <form onSubmit={getFilteredClasses}>
+                <input
+                    type="text"
+                    name="searchBar"
+                    id="searchBar"
+                    className='searchbar'
+                    placeholder="   Filter class by instructor, type, date, intensity, location, etc.."
+                    onChange={inputHandler}
+                />
+                </form>
             </div>
-            <ClientClasses />
+                    <ClientClasses classes={availClasses}/>
+            </div>
         </ClientPageStyle>
     )
-}
+    };
+
+
+
+
+
+ ////////////STYLING COMPONENTS///////////////
 
 const ClientPageStyle = styled.div `
+cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🪃</text></svg>") 16 0,auto; /*!emojicursor.app*/
+scroll-behavior: smooth;
+transition: transform 1s ease;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
@@ -63,8 +108,25 @@ background: linear-gradient(-45deg, #000000, #14213d, #fca311, #e5e5e5, #ffffff)
 .bottom-div{
     margin:0;
     width:100%;
-    height: 91vh;
+    height: auto;
     background-color: black;
+    display: flex;
+flex-direction: column;
+align-items: center;
+.bottom-heading{
+    color: #e5e5e5;
+}
+#searchWrapper{
+    height: 5rem;
+    width: 75%;
+}
+#searchBar{
+    height: 5rem;
+    border-radius: 1rem;
+    width: 100%;
+    font-size: 2.5rem;
+    color: #14213d;
+}
 }
 .left-side{
     margin: 0;
@@ -77,10 +139,12 @@ background: linear-gradient(-45deg, #000000, #14213d, #fca311, #e5e5e5, #ffffff)
 .heading-container{
     display: flex;
     padding-top: 100px;
-    margin-left: 80px;
+    margin-left: 60px;
     width: 50%;
     
+    
 .client-heading{
+    text-decoration: underline;
     color: #2B2B2B;
     font-size: 5rem;
     font-weight: bold;
@@ -90,15 +154,16 @@ background: linear-gradient(-45deg, #000000, #14213d, #fca311, #e5e5e5, #ffffff)
     padding-top: 50px;
     margin-left: 50px;
     border: 3px black;
-    overflow: hidden;
+    /* overflow: hidden; */
 .crunchImg{
     border-radius: 50%;
     border: 10px black;
     box-shadow: 0 10px 20px rgba(0,0,0,.2);
-    transition: transform .5s ease;
+}
 }
 .client-img:hover .crunchI{
     transform: scale(1.5);
+    
 }
 }
 }
@@ -126,7 +191,7 @@ background: linear-gradient(-45deg, #000000, #14213d, #fca311, #e5e5e5, #ffffff)
     box-shadow: 0 10px 20px rgba(0,0,0,.2); */
     
 .top-text{
-    color: white;
+    color: #e5e5e5;
     text-shadow: 2px 2px 10px gray;
     font-size: 4rem;
     text-align: left;
@@ -134,16 +199,17 @@ background: linear-gradient(-45deg, #000000, #14213d, #fca311, #e5e5e5, #ffffff)
 }
 .second-text{
     margin-left: 40px;
-    color: white;
+    color: #e5e5e5;
     font-size: 3rem;
     text-align: right;
+    text-shadow: 2px 2px 10px gray;
 }
 }
 .LocationSubmit{
     display: flex;
     justify-content: center;
     align-content: color;
-    cursor: pointer;
+    cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>↖️</text></svg>") 16 0,auto; /*!emojicursor.app*/
         border: 0px solid #3498db;
         background-color: transparent;
         height: 20px;
@@ -151,18 +217,21 @@ background: linear-gradient(-45deg, #000000, #14213d, #fca311, #e5e5e5, #ffffff)
         color: #3498db;
         font-size: 5rem;
         margin-bottom: 40px;
-        margin-right: 868px;
+        margin-right: 0px;
 
 .arrow{
+    font-size: 5rem;
     font-weight: bold;
     background-position: left;
-    color: white;
     transition: transform .2s;
+    color: #3498db;
+    transition: width 2s, height 4s;
 }
  }
  .arrow:hover{
-    box-shadow: 0 10px 20px rgba(0,0,0,.2);
-    transform: scale(1.1);
+    /* box-shadow: 0 10px 20px rgba(0,0,0,.2); */
+    font-size: 6rem;
+    margin-right:5px;
 
     /* text-transform: uppercase; */
  }
