@@ -9,28 +9,7 @@ import axios from 'axios'
 
 export default function ClientPage() {
     
-    const myName = "Samuel Dunder"; // ------->> However to link the username with API
-    // const {searchedClasses} = useState()
-    // const [searchTerm, setSearchTerm] = useState("");
-
-    // const includesSearchTerm= (value) => {
-    //     return value.toLowerCase().includes(searchTerm.toLowerCase());}
-        
-    //     const postMatchesSearchTerm= (availClasses) => {
-    //     let fields = [];
-    //     fields.push(availClasses.type);
-    //     fields.push(availClasses.location);
-    //     fields.push(availClasses.instructor_name);
-    //     fields.push(availClasses.date);
-    //     fields.push(availClasses.time);
-    //     fields.push(searchTerm)
-    //     return fields.find(includesSearchTerm);
-    //     };
-    //     const getFilteredClasses= (event) => {event.preventDefault(); availClasses.filter(postMatchesSearchTerm)};
-
-    //     const inputHandler = (event) => {
-    //          setSearchTerm(event.target.value);
-    //         };
+    const myName = "Samuel Dunder"; 
 
     return (
         <ClientPageStyle className='client-page-container'>
@@ -57,28 +36,11 @@ export default function ClientPage() {
             </div>
             <div className='bottom-div' >
             <div id='down'></div>
-            {/* <h1 className='bottom-heading' >🏃‍♀️What're Your Goals🏋️‍♂️</h1>
-            <div id="searchWrapper">
-                <form onSubmit={getFilteredClasses}>
-                <input
-                    type="text"
-                    name="searchBar"
-                    id="searchBar"
-                    className='searchbar'
-                    placeholder="   Filter class by instructor, type, date, intensity, location, etc.."
-                    onChange={inputHandler}
-                />
-                </form>
-            </div> */}
                     <ClientClasses/>
             </div>
         </ClientPageStyle>
     )
     };
-
-
-
-
 
  ////////////STYLING COMPONENTS///////////////
 
@@ -115,21 +77,6 @@ background: linear-gradient(-45deg, #000000, #14213d, #fca311, #e5e5e5, #ffffff)
     display: flex;
 flex-direction: column;
 align-items: center;
-align-items: center;
-/* .bottom-heading{
-    color: #e5e5e5;
-}
-#searchWrapper{
-    height: 5rem;
-    width: 75%;
-}
-#searchBar{
-    height: 5rem;
-    border-radius: 1rem;
-    width: 100%;
-    font-size: 2.5rem;
-    color: #14213d;
-} */
 }
 .left-side{
     margin: 0;
@@ -231,14 +178,31 @@ align-items: center;
 }
  }
  .arrow:hover{
-    /* box-shadow: 0 10px 20px rgba(0,0,0,.2); */
     font-size: 6rem;
     margin-right:5px;
-
-    /* text-transform: uppercase; */
  }
- /* .LocationSubmit */
 }
+
+`
+
+
+////////////JUNK///////////////////
+
+/* .bottom-heading{
+    color: #e5e5e5;
+}
+#searchWrapper{
+    height: 5rem;
+    width: 75%;
+}
+#searchBar{
+    height: 5rem;
+    border-radius: 1rem;
+    width: 100%;
+    font-size: 2.5rem;
+    color: #14213d;
+} */
+
 /* .button-container{
     display: flex;
     flex-direction: column;
@@ -254,9 +218,6 @@ align-items: center;
     font-size: 1.5rem;
     font-weight: bold;
 } */ 
-
-}
-`
 // 
 //     /* margin: 20px;
 // height: 5rem;
@@ -265,3 +226,39 @@ align-items: center;
 
 // border-radius: 2rem; */
 /* border:none; */
+// ------->> However to link the username with API
+    // const {searchedClasses} = useState()
+    // const [searchTerm, setSearchTerm] = useState("");
+
+    // const includesSearchTerm= (value) => {
+    //     return value.toLowerCase().includes(searchTerm.toLowerCase());}
+        
+    //     const postMatchesSearchTerm= (availClasses) => {
+    //     let fields = [];
+    //     fields.push(availClasses.type);
+    //     fields.push(availClasses.location);
+    //     fields.push(availClasses.instructor_name);
+    //     fields.push(availClasses.date);
+    //     fields.push(availClasses.time);
+    //     fields.push(searchTerm)
+    //     return fields.find(includesSearchTerm);
+    //     };
+    //     const getFilteredClasses= (event) => {event.preventDefault(); availClasses.filter(postMatchesSearchTerm)};
+
+    //     const inputHandler = (event) => {
+    //          setSearchTerm(event.target.value);
+    //         };
+                // eslint-disable-next-line no-lone-blocks
+                {/* <h1 className='bottom-heading' >🏃‍♀️What're Your Goals🏋️‍♂️</h1>
+            <div id="searchWrapper">
+                <form onSubmit={getFilteredClasses}>
+                <input
+                    type="text"
+                    name="searchBar"
+                    id="searchBar"
+                    className='searchbar'
+                    placeholder="   Filter class by instructor, type, date, intensity, location, etc.."
+                    onChange={inputHandler}
+                />
+                </form>
+            </div> */}

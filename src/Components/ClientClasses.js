@@ -102,13 +102,20 @@ width: 100%;
     justify-content: flex-start;
 }
  h3{
-    color: black;
+    color: #14213d;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.client-class:hover{
+    h3{
+        color: #fca311;
+    }
 }
 p{
     color: black;
 }
 h4{
-    color: black;
+    color: #14213d;
 }
 .button{
     width: 100%;
@@ -124,5 +131,6 @@ h4{
 .bold{
     font-weight: bold;
     font-size: 2rem;
+    color: #14213d;
 }
 `
