@@ -30,7 +30,7 @@ function NavBar() {
             <li className="nav-items">
               <NavLink
                 exact
-                to="/login"
+                to="/api/user/login"
                 activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
