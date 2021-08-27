@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import "../styles/Signup.css";
-import axios from "axios";
-import axiosWithAuth from '../utils/axiosWithAuth';
-import { useHistory } from 'react-router';
-
-
+// import axios from "axios";
+import axiosWithAuth from "../utils/axiosWithAuth";
+import { useHistory } from "react-router";
 
 const initialFormValues = {
   role: "",
   username: "",
-  authCode: "",
   password: "",
+  instructor_key: ""
 };
 
 export default function Signup() {
@@ -20,9 +18,8 @@ export default function Signup() {
   const handleChanges = (e) => {
     const { value, name } = e.target;
     setFormValues({ ...formValues, [name]: value });
+    console.log(formValues);
   };
-
-  console.log(formValues)
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -31,28 +28,23 @@ export default function Signup() {
   const newSignUp = () => {
     const newUser = {
       username: formValues.username,
-      password: formValues.password
-      // authorization: formValues.authCode,
+      password: formValues.password,
+      instructor_key: formValues.instructor_key
     };
     postUser(newUser);
+    console.log(newUser);
   };
-  // const postUser = (newUser) => {
-  //   axios
-  //     .post("api/user/register", newUser) //?? correct URL?
-  //     .then(console.log(newUser))
-  //     .catch((err) => console.error(err))
-  //     .finally(setFormValues(initialFormValues));
-  // };
 
   const postUser = (newUser) => {
     axiosWithAuth()
-    .post('https://web44scaffolding.herokuapp.com/api/user/register', newUser)
-    .then((res) => {
-      console.log(res)
-      // push('/api/user/login')
-    })
-    .catch((err) => console.log(err));
-};
+      .post("https://web44scaffolding.herokuapp.com/api/user/register", newUser)
+      .then((res) => {
+        console.log(res);
+        // push('/api/user/login')
+      })
+      .catch((err) => console.log(err))
+      .finally(setFormValues(initialFormValues));
+  };
 
   return (
     <div className="signUp">
@@ -60,28 +52,13 @@ export default function Signup() {
         <h4>SignUp</h4>
         <form onSubmit={onSubmit}>
           <div className="role">
-            <input
-              id="radioInstructor"
-              type="radio"
-              name="role"
-              value="instructor"
-              onChange={handleChanges}
-              checked={formValues.role === "instructor"}
-            />
+            <input id="radioInstructor" type="radio" name="role" onChange={handleChanges} value={true} />
             <label htmlFor="radioInstructor">Instructor</label>
-
-            <input
-              id="radioClient"
-              type="radio"
-              name="role"
-              value="client"
-              onChange={handleChanges}
-              checked={formValues.role === "client"}
-            />
+            <input id="radioClient" type="radio" name="role" onChange={handleChanges} value={false} />
             <label htmlFor="radioClient">Client</label>
           </div>
           <div className="inputs">
-            {formValues.role === "instructor" && (
+            {formValues.role === "true" && (
               <div>
                 <label htmlFor="authorizationCode">Authorization Code</label>
                 <input
