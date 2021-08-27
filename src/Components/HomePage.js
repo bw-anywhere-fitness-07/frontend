@@ -14,7 +14,7 @@ const HomePage = () => {
                     <span className="heading-primary-main">Anywhere</span>
                     <span className="heading-primary-sub">Fitness</span>
                 </h1>
-                <NavLink exact to="/login" className="btn btn-white btn-animated">Login</NavLink>
+                <NavLink exact to="/api/user/login" className="btn btn-white btn-animated">Login</NavLink>
             </div>
         </div>
     )
