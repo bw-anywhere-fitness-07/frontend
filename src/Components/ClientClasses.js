@@ -127,17 +127,24 @@ const StyledClasses = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-  }
-  h3 {
+}
+ h3{
+    color: #14213d;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.client-class:hover{
+    h3{
+        color: #fca311;
+    }
+}
+p{
     color: black;
-  }
-  p {
-    color: black;
-  }
-  h4 {
-    color: black;
-  }
-  .button {
+}
+h4{
+    color: #14213d;
+}
+.button{
     width: 100%;
   }
   .add-bttn {
@@ -151,5 +158,6 @@ const StyledClasses = styled.div`
   .bold {
     font-weight: bold;
     font-size: 2rem;
-  }
-`;
+    color: #14213d;
+}
+`
