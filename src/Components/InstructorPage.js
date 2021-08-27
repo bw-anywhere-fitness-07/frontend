@@ -5,6 +5,7 @@ import dummyData from "../dummy-data/classes";
 import InstructorClasses from "./InstructorClasses";
 import "../styles/InstructorPage.css";
 import axios from "axios";
+import axiosWithAuth from "../utils/axiosWithAuth";
 
 const initialClassValues = {
   id: "",
@@ -16,19 +17,26 @@ const initialClassValues = {
   intensity: "",
   location: "",
   capacity: "",
-  registered: 0,
+  registered: 0
 };
 
 export default function InstructorPage() {
   // const [classes, setClasses] = useState(dummyData);
-  const [myClasses, setMyClasses] = useState(dummyData);
+  const [myClasses, setMyClasses] = useState([]);
   const [addClass, setAddClass] = useState(false);
   const [createClass, setCreateClass] = useState(initialClassValues);
 
   const myInstructorName = "Bob"; //not sure how this gets passed from instructor login?
-  // useEffect(() => {
-  //   setClasses(dummyData);axios.get
-  // }, []);
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get("api/classes")
+      .then((res) => {
+        console.log(res.data);
+        setMyClasses(res.data);
+      });
+  }, []);
+
   // useEffect(() => {
   //   setMyClasses(classes.filter((item) => item.instructor_name === myInstructorName));
   //   setMyClasses(classes.filter((item) => item));
@@ -49,26 +57,23 @@ export default function InstructorPage() {
   };
   const createNewClass = () => {
     const newClass = {
-      id: 75,
-      //  API generating id, yeah??
       // instructor_name: createClass.instructor_name,
       // : name from whoever is signed in?
+      name: "ClassName",
       type: createClass.type,
-      date: createClass.date,
-      time: createClass.time,
-      duration: createClass.duration,
-      intensity: createClass.intensity,
+      // date: createClass.date,
+      start_time: createClass.time,
+      duration_minutes: createClass.duration,
+      intensity_level: createClass.intensity,
       location: createClass.location,
-      capacity: createClass.capacity,
-      registered: 0,
+      max_attendees: createClass.capacity
+      // registered: 0
     };
 
-    setMyClasses([...myClasses, newClass]); // once server is up, axios.put instead, and set classes with useEffect up above?
-    axios
-      // .post("https://mocki.io/v1/d4cc178d-5c35-4359-a3a4-69d21803f04e", newClass)
-      .get("https://mocki.io/v1/d4cc178d-5c35-4359-a3a4-69d21803f04e") // this is a test api, switch to post once ours is working
+    axiosWithAuth()
+      .post("api/classes", newClass)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setMyClasses([...myClasses, res.data]);
       })
       .catch((err) => {
@@ -80,7 +85,8 @@ export default function InstructorPage() {
   };
 
   const deleteClass = (courseId) => {
-    // console.log("deleting class...", courseId);
+    console.log("deleting class...", courseId);
+
     setMyClasses(myClasses.filter((item) => item.id !== courseId));
 
     // ======================
@@ -90,7 +96,7 @@ export default function InstructorPage() {
   const saveChanges = (editCourse) => {
     setMyClasses(
       myClasses.map((myClass) => {
-        if (myClass.id === editCourse.id) {
+        if (myClass.class_id === editCourse.id) {
           return editCourse;
         }
 
@@ -110,13 +116,19 @@ export default function InstructorPage() {
           <div className="addClass">
             <form onSubmit={onSubmit} className="form-add-class">
               <input type="text" name="type" value={createClass.type} placeholder="type" onChange={handleChanges} />
-              <input type="text" name="date" value={createClass.date} placeholder="date" onChange={handleChanges} />
-              <input type="text" name="time" value={createClass.time} placeholder="time" onChange={handleChanges} />
+              {/* <input type="text" name="date" value={createClass.date} placeholder="date" onChange={handleChanges} /> */}
+              <input
+                type="datetime-local"
+                name="time"
+                value={createClass.time}
+                placeholder="time"
+                onChange={handleChanges}
+              />
               <input
                 type="text"
                 name="duration"
                 value={createClass.duration}
-                placeholder="class length"
+                placeholder="length (in min)"
                 onChange={handleChanges}
               />
               <input
