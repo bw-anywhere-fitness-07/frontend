@@ -10,7 +10,7 @@ import HomePage from "./Components/HomePage";
 import Signup from "./Components/Signup";
 import Login from './Components/Login'
 import InstructorPage from './Components/InstructorPage'
-// import ClientPage from './Components/ClientPage'
+import ClientPage from './Components/ClientPage'
 // import ClientClasses from './Components/ClientClasses'
 
 
@@ -22,7 +22,9 @@ function App() {
         <PrivateRoute path="/protected" >
           {/* <ClientPage /> */}
           <InstructorPage />
-        </PrivateRoute>        
+        </PrivateRoute>
+        <Route exact path={"/client-page"} component={ClientPage} />
+        <Route exact path={"/instructor-page"} component={InstructorPage} />        
         <Route exact path={"/"} component={HomePage} />
         <Route exact path={"/api/user/login"} component={Login}/>
         <Route exact path={"/signup"} component={Signup} />

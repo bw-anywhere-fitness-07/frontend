@@ -2,35 +2,35 @@ import React, {useState} from 'react'
 import ClientClasses from './ClientClasses'
 import styled from 'styled-components'
 import crunch from '../images/fitness4.jpg'
-import dummyData from "../dummy-data/classes";
+// import dummyData from "../dummy-data/classes";
 import axios from 'axios'
 
 // const initialValue = {dummyData}
 
 export default function ClientPage() {
-    const [availClasses, setAvailClasses] = useState(dummyData);
+    
     const myName = "Samuel Dunder"; // ------->> However to link the username with API
     // const {searchedClasses} = useState()
-    const [searchTerm, setSearchTerm] = useState("");
+    // const [searchTerm, setSearchTerm] = useState("");
 
-    const includesSearchTerm= (value) => {
-        return value.toLowerCase().includes(searchTerm.toLowerCase());}
+    // const includesSearchTerm= (value) => {
+    //     return value.toLowerCase().includes(searchTerm.toLowerCase());}
         
-        const postMatchesSearchTerm= (availClasses) => {
-        let fields = [];
-        fields.push(availClasses.type);
-        fields.push(availClasses.location);
-        fields.push(availClasses.instructor_name);
-        fields.push(availClasses.date);
-        fields.push(availClasses.time);
-        fields.push(searchTerm)
-        return fields.find(includesSearchTerm);
-        };
-        const getFilteredClasses= (event) => {event.preventDefault(); availClasses.filter(postMatchesSearchTerm)};
+    //     const postMatchesSearchTerm= (availClasses) => {
+    //     let fields = [];
+    //     fields.push(availClasses.type);
+    //     fields.push(availClasses.location);
+    //     fields.push(availClasses.instructor_name);
+    //     fields.push(availClasses.date);
+    //     fields.push(availClasses.time);
+    //     fields.push(searchTerm)
+    //     return fields.find(includesSearchTerm);
+    //     };
+    //     const getFilteredClasses= (event) => {event.preventDefault(); availClasses.filter(postMatchesSearchTerm)};
 
-        const inputHandler = (event) => {
-             setSearchTerm(event.target.value);
-            };
+    //     const inputHandler = (event) => {
+    //          setSearchTerm(event.target.value);
+    //         };
 
     return (
         <ClientPageStyle className='client-page-container'>
@@ -57,7 +57,7 @@ export default function ClientPage() {
             </div>
             <div className='bottom-div' >
             <div id='down'></div>
-            <h1 className='bottom-heading' >🏃‍♀️What're Your Goals🏋️‍♂️</h1>
+            {/* <h1 className='bottom-heading' >🏃‍♀️What're Your Goals🏋️‍♂️</h1>
             <div id="searchWrapper">
                 <form onSubmit={getFilteredClasses}>
                 <input
@@ -69,8 +69,8 @@ export default function ClientPage() {
                     onChange={inputHandler}
                 />
                 </form>
-            </div>
-                    <ClientClasses classes={availClasses}/>
+            </div> */}
+                    <ClientClasses/>
             </div>
         </ClientPageStyle>
     )
@@ -110,12 +110,13 @@ background: linear-gradient(-45deg, #000000, #14213d, #fca311, #e5e5e5, #ffffff)
 .bottom-div{
     margin:0;
     width:100%;
-    height: auto;
+    height: 91vh;
     background-color: black;
     display: flex;
 flex-direction: column;
 align-items: center;
-.bottom-heading{
+align-items: center;
+/* .bottom-heading{
     color: #e5e5e5;
 }
 #searchWrapper{
@@ -128,7 +129,7 @@ align-items: center;
     width: 100%;
     font-size: 2.5rem;
     color: #14213d;
-}
+} */
 }
 .left-side{
     margin: 0;
@@ -211,7 +212,6 @@ align-items: center;
     display: flex;
     justify-content: center;
     align-content: color;
-    cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>↖️</text></svg>") 16 0,auto; /*!emojicursor.app*/
         border: 0px solid #3498db;
         background-color: transparent;
         height: 20px;
