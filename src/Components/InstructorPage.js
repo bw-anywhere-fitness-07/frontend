@@ -58,22 +58,21 @@ export default function InstructorPage() {
   const createNewClass = () => {
     const newClass = {
       // instructor_name: createClass.instructor_name,
-      // : name from whoever is signed in?
-      name: "ClassName",
+      name: createClass.name,
       type: createClass.type,
       // date: createClass.date,
       start_time: createClass.time,
       duration_minutes: createClass.duration,
       intensity_level: createClass.intensity,
       location: createClass.location,
-      max_attendees: createClass.capacity
+      max_attendees: createClass.max_attendees
       // registered: 0
     };
 
     axiosWithAuth()
       .post("api/classes", newClass)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setMyClasses([...myClasses, res.data]);
       })
       .catch((err) => {
@@ -86,29 +85,46 @@ export default function InstructorPage() {
 
   const deleteClass = (courseId) => {
     console.log("deleting class...", courseId);
-
-    setMyClasses(myClasses.filter((item) => item.id !== courseId));
-
-    // ======================
-    // ALSO need to post-delete or (delete request based on server end) class from server by this same Id
+    axiosWithAuth()
+      .delete(`api/classes/${courseId}`)
+      .then(setMyClasses(myClasses.filter((item) => [item.course_id] !== courseId)));
+    // .then((res) => {
+    //   setMyClasses((prevState) => [...prevState, res.data]);
+    // });
   };
 
   const saveChanges = (editCourse) => {
-    setMyClasses(
-      myClasses.map((myClass) => {
-        if (myClass.class_id === editCourse.id) {
-          return editCourse;
-        }
+    const editedCourse = {
+      name: editCourse.name,
+      type: editCourse.type,
+      start_time: editCourse.start_time,
+      duration_minutes: editCourse.duration_minutes,
+      intensity_level: editCourse.intensity_level,
+      location: editCourse.location,
+      max_attendees: editCourse.max_attendees
+    };
 
-        return myClass;
-      })
-    );
+    console.log("editing class", editedCourse);
+
+    axiosWithAuth()
+      .put(`api/classes/${editCourse.class_id}`, editedCourse)
+      .then((res) => {
+        console.log(res);
+        // setMyClasses(
+        //   myClasses.map((myClass) => {
+        //     if (myClass.class_id === editCourse.id) {
+        //       return editedCourse;
+        //     }
+        //     return myClass;
+        //   })
+        // );
+      });
   };
 
   return (
     <div className="instructor-page-container">
-      <div className='instructor-heading'>
-      <h2>My Classes</h2>
+      <div className="instructor-heading">
+        <h2>My Classes</h2>
       </div>
       <div className="btn-contain">
         <button className="inst-btn" onClick={onClick}>
@@ -121,8 +137,8 @@ export default function InstructorPage() {
               {/* <input type="text" name="date" value={createClass.date} placeholder="date" onChange={handleChanges} /> */}
               <input
                 type="datetime-local"
-                name="time"
-                value={createClass.time}
+                name="start_time"
+                value={createClass.start_time}
                 placeholder="time"
                 onChange={handleChanges}
               />
@@ -149,8 +165,8 @@ export default function InstructorPage() {
               />
               <input
                 type="text"
-                name="capacity"
-                value={createClass.capacity}
+                name="max_attendees"
+                value={createClass.max_attendees}
                 placeholder="class size"
                 onChange={handleChanges}
               />
