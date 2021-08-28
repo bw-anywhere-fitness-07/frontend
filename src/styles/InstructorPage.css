@@ -1,13 +1,25 @@
 .instructor-page-container {
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to right, rgba(255, 0, 0, 0.356) 0%, white 51%, rgba(0, 0, 255, 0.404) 100%);
+  background-image: url(../images/fitness2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
+.instructor-heading{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+}
 .instructor-page-container h2 {
   color: white;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  background-image: linear-gradient(to top, #14213d, #e5e5e5);
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0);
+  background-image: linear-gradient(to bottom, #14213d, #e5e5e5);
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  width: 50%;
 }
 
 .instructor-page-container .btn-contain {
@@ -45,4 +57,8 @@
   border-radius: 1.5rem;
   padding: 2rem 3rem;
   box-shadow: inset 0 0 15px 15px rgba(255, 255, 255, 0.267);
+}
+
+.inst-btn:hover {
+    filter: brightness(120%);
 }
