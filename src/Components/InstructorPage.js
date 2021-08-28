@@ -61,9 +61,9 @@ export default function InstructorPage() {
       name: createClass.name,
       type: createClass.type,
       // date: createClass.date,
-      start_time: createClass.time,
-      duration_minutes: createClass.duration,
-      intensity_level: createClass.intensity,
+      start_time: createClass.start_time,
+      duration_minutes: createClass.duration_minutes,
+      intensity_level: createClass.intensity_level,
       location: createClass.location,
       max_attendees: createClass.max_attendees
       // registered: 0
@@ -87,7 +87,14 @@ export default function InstructorPage() {
     console.log("deleting class...", courseId);
     axiosWithAuth()
       .delete(`api/classes/${courseId}`)
-      .then(setMyClasses(myClasses.filter((item) => [item.course_id] !== courseId)));
+      .then(() => {
+        console.log("courseId", courseId);
+        console.log(
+          "courses",
+          myClasses.map((i) => i.course_id)
+        );
+        setMyClasses(myClasses.filter((item) => item.class_id !== courseId));
+      });
     // .then((res) => {
     //   setMyClasses((prevState) => [...prevState, res.data]);
     // });
@@ -95,6 +102,7 @@ export default function InstructorPage() {
 
   const saveChanges = (editCourse) => {
     const editedCourse = {
+      class_id: editCourse.class_id,
       name: editCourse.name,
       type: editCourse.type,
       start_time: editCourse.start_time,
@@ -110,14 +118,14 @@ export default function InstructorPage() {
       .put(`api/classes/${editCourse.class_id}`, editedCourse)
       .then((res) => {
         console.log(res);
-        // setMyClasses(
-        //   myClasses.map((myClass) => {
-        //     if (myClass.class_id === editCourse.id) {
-        //       return editedCourse;
-        //     }
-        //     return myClass;
-        //   })
-        // );
+        setMyClasses(
+          myClasses.map((myClass) => {
+            if (myClass.class_id === editCourse.class_id) {
+              return editedCourse;
+            }
+            return myClass;
+          })
+        );
       });
   };
 
@@ -133,26 +141,21 @@ export default function InstructorPage() {
         {addClass && (
           <div className="addClass">
             <form onSubmit={onSubmit} className="form-add-class">
+              <input type="text" name="name" value={createClass.name} placeholder="name" onChange={handleChanges} />
               <input type="text" name="type" value={createClass.type} placeholder="type" onChange={handleChanges} />
               {/* <input type="text" name="date" value={createClass.date} placeholder="date" onChange={handleChanges} /> */}
-              <input
-                type="datetime-local"
-                name="start_time"
-                value={createClass.start_time}
-                placeholder="time"
-                onChange={handleChanges}
-              />
+              <input type="datetime-local" name="start_time" value={createClass.start_time} onChange={handleChanges} />
               <input
                 type="text"
-                name="duration"
-                value={createClass.duration}
+                name="duration_minutes"
+                value={createClass.duration_minutes}
                 placeholder="length (in min)"
                 onChange={handleChanges}
               />
               <input
                 type="text"
-                name="intensity"
-                value={createClass.intensity}
+                name="intensity_level"
+                value={createClass.intensity_level}
                 placeholder="difficulty level"
                 onChange={handleChanges}
               />
