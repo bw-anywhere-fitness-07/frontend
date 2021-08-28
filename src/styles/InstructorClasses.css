@@ -17,7 +17,7 @@
   color: rgb(29, 64, 95);
   border: solid rgba(155, 155, 155, 0.651) 6px;
   border-radius: 2rem;
-  width: 40rem;
+  width: 30rem;
   padding: 3rem;
   box-shadow: 0 0 20px 20px #e5e5e557;
   background-color: rgba(255, 255, 255, 0.705);
@@ -46,7 +46,7 @@
   width: 30rem;
   padding: 3rem;
   background-color: #e5e5e5cb;
-  margin: 4rem 4rem;
+  margin: 3rem 2rem;
   border:5px solid #e5e5e557;
 }
 
@@ -67,15 +67,20 @@
   color: #ffffff;
   font-size: 1.5rem;
   padding: 3px 10px;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   text-transform: uppercase;
   margin-top: 2rem;
   border-radius: 5px;
+  margin-right: 20px;
   
 }
 
 .course-card p:hover{
   text-shadow: 0 0 10px  #14213d;
   filter: saturate(120%);
+}
+
+.edit-btn{
+  margin: 0;
 }

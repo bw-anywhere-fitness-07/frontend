@@ -1,29 +1,32 @@
 // The Private instructor page
 
 import React, { useEffect, useState } from "react";
+import dummyData from "../dummy-data/classes";
 import InstructorClasses from "./InstructorClasses";
 import "../styles/InstructorPage.css";
 import axios from "axios";
 import axiosWithAuth from "../utils/axiosWithAuth";
 
 const initialClassValues = {
-  class_id: "",
-  duration_minutes: "",
-  instructor: "",
-  intensity_level: "",
+  id: "",
+  instructor_name: "", // : name from whoever is signed in?
+  type: "",
+  date: "",
+  time: "",
+  duration: "",
+  intensity: "",
   location: "",
-  max_attendees: "",
-  name: "",
-  start_time: "",
-  type: ""
+  capacity: "",
+  registered: 0
 };
 
 export default function InstructorPage() {
+  // const [classes, setClasses] = useState(dummyData);
   const [myClasses, setMyClasses] = useState([]);
   const [addClass, setAddClass] = useState(false);
   const [createClass, setCreateClass] = useState(initialClassValues);
 
-  // const myInstructorName = "Bob"; //not sure how this gets passed from instructor login?
+  const myInstructorName = "Bob"; //not sure how this gets passed from instructor login?
 
   useEffect(() => {
     axiosWithAuth()
@@ -55,11 +58,13 @@ export default function InstructorPage() {
   const createNewClass = () => {
     const newClass = {
       // instructor_name: createClass.instructor_name,
+      // : name from whoever is signed in?
       name: "ClassName",
       type: createClass.type,
-      start_time: createClass.start_time,
-      duration_minutes: createClass.duration_minutes,
-      intensity_level: createClass.intensity_level,
+      // date: createClass.date,
+      start_time: createClass.time,
+      duration_minutes: createClass.duration,
+      intensity_level: createClass.intensity,
       location: createClass.location,
       max_attendees: createClass.capacity
       // registered: 0
@@ -81,60 +86,57 @@ export default function InstructorPage() {
 
   const deleteClass = (courseId) => {
     console.log("deleting class...", courseId);
-    axiosWithAuth()
-      .delete(`api/classes/${courseId}`)
-      .then(setMyClasses(myClasses.filter((item) => [item.course_id] !== courseId)));
+
+    setMyClasses(myClasses.filter((item) => item.id !== courseId));
+
+    // ======================
+    // ALSO need to post-delete or (delete request based on server end) class from server by this same Id
   };
 
   const saveChanges = (editCourse) => {
-    console.log("editing class", editCourse);
-    axiosWithAuth()
-      .put(`api/classes/${editCourse.class_id}`, editCourse)
-      .then((res) => {
-        console.log();
-        setMyClasses(
-          myClasses.map((myClass) => {
-            if (myClass.class_id === editCourse.id) {
-              return editCourse;
-            }
+    setMyClasses(
+      myClasses.map((myClass) => {
+        if (myClass.class_id === editCourse.id) {
+          return editCourse;
+        }
 
-            return myClass;
-          })
-        );
-      });
+        return myClass;
+      })
+    );
   };
 
   return (
     <div className="instructor-page-container">
+      <div className='instructor-heading'>
       <h2>My Classes</h2>
+      </div>
       <div className="btn-contain">
         <button className="inst-btn" onClick={onClick}>
-          Add a Class
+          <p>Add a Class</p>
         </button>
         {addClass && (
           <div className="addClass">
             <form onSubmit={onSubmit} className="form-add-class">
-              <input type="text" name="name" value={createClass.name} placeholder="name" onChange={handleChanges} />
               <input type="text" name="type" value={createClass.type} placeholder="type" onChange={handleChanges} />
               {/* <input type="text" name="date" value={createClass.date} placeholder="date" onChange={handleChanges} /> */}
               <input
                 type="datetime-local"
                 name="time"
-                value={createClass.start_time}
+                value={createClass.time}
                 placeholder="time"
                 onChange={handleChanges}
               />
               <input
                 type="text"
-                name="duration_minutes"
-                value={createClass.duration_minutes}
+                name="duration"
+                value={createClass.duration}
                 placeholder="length (in min)"
                 onChange={handleChanges}
               />
               <input
                 type="text"
-                name="intensity_level"
-                value={createClass.intensity_level}
+                name="intensity"
+                value={createClass.intensity}
                 placeholder="difficulty level"
                 onChange={handleChanges}
               />
@@ -148,7 +150,7 @@ export default function InstructorPage() {
               <input
                 type="text"
                 name="capacity"
-                value={createClass.max_attendees}
+                value={createClass.capacity}
                 placeholder="class size"
                 onChange={handleChanges}
               />
