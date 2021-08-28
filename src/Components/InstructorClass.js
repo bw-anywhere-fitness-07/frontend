@@ -38,7 +38,7 @@ export default function EditClass(props) {
             <input type="text" name="time" value={editCourse.time} onChange={onChange} />
           </label> */}
           <label>
-            Length <input type="text" name="duration" value={editCourse.duration_minutes} onChange={onChange} />
+            Length <input type="text" name="duration_minutes" value={editCourse.duration_minutes} onChange={onChange} />
           </label>
           <label>
             Difficulty
