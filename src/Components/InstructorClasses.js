@@ -15,7 +15,7 @@ export default function InstructorClasses(props) {
           <InstructorClass
             key={course.class_id}
             saveChanges={saveChanges}
-            deleteClass={() => deleteClass(course.id)}
+            deleteClass={() => deleteClass(course.class_id)}
             course={course}
           />
         );
