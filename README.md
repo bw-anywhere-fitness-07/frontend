@@ -1,6 +1,4 @@
-## Unit 2 (and 3) will be in charge of creating the components
-## Unit 3 will provide authentication functionality for clients and instructors
-## Unit 4 builds the API (back-end)
+# Anywhere Fitness
 
 ## ☝️ **Pitch**
 
@@ -10,7 +8,7 @@ While you could use several mobile apps to accomplish this, **AnywhereFitness** 
 
 Instructors can take attendance, request and process payments, create virtual “punch passes” for each type of class offered, alert clients of cancellations or location changes and so much more. Clients can easily find out information on classes - location, class size, start time and duration, as well as reschedule or cancel an upcoming appointment or reservation right from the mobile app.
 
-## ✅  **MVP**
+## ✅  **Details**
 
 1. User can create/register as a `client` and login with the registered credentials.
 
@@ -42,6 +40,6 @@ Instructors can take attendance, request and process payments, create virtual �
 
 7. Authenticated `user` can reserve a spot in a `class` with available seats open, and can reschedule or cancel their current `reservation` from the mobile app.
 
-## 🏃‍♀️**Stretch**
+## 🏃‍♀️**Features**
 
 1. Implement payments using PayPal, Stripe or another 3rd party API.
